@@ -8,6 +8,8 @@ public class ButtonBehavior : MonoBehaviour
 
     public bool turretIsSelected = false;
     public bool powerPlantSelected = false;
+    public bool aAGunSelected = false;
+    private Image myAaGunImage;
     private Image myTurretImage;
     private Image myPowerPlantImage;
     private Board myBoard;
@@ -19,6 +21,7 @@ public class ButtonBehavior : MonoBehaviour
         myBoard = GameObject.Find("Board").GetComponent<Board>();
         myTurretImage = GameObject.Find("Turret Button").GetComponent<Image>();
         myPowerPlantImage = GameObject.Find("Power Plant Button").GetComponent<Image>();
+        myAaGunImage = GameObject.Find("AA Gun Button").GetComponent<Image>();
         panel = GameObject.Find("Panel").GetComponent<Panel>();
 	}
 	
@@ -61,6 +64,20 @@ public class ButtonBehavior : MonoBehaviour
         {
             myPowerPlantImage.color = Color.white;
             powerPlantSelected = false;
+        }
+    }
+
+    public void TestAaGun()
+    {
+        if (!aAGunSelected)
+        {
+            aAGunSelected = true;
+            myAaGunImage.color = Color.green;
+        }
+        else
+        {
+            myAaGunImage.color = Color.white;
+            aAGunSelected = false;
         }
     }
 }
