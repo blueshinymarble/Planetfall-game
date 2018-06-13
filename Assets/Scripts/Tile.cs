@@ -38,7 +38,6 @@ public class Tile : MonoBehaviour
             GameObject spawnedTurret = Instantiate(turret, transform.position, Quaternion.identity);
             spawnedTurret.transform.parent = gameObject.transform;
         }
-
     }
 
     
