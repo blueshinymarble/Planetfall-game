@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour
 {
 
     public GameObject turret;
+    public GameObject powerPlant;
     public GameObject[] terrainTiles;
 
     private ButtonBehavior buttonBehavior;
@@ -37,6 +38,13 @@ public class Tile : MonoBehaviour
         {
             GameObject spawnedTurret = Instantiate(turret, transform.position, Quaternion.identity);
             spawnedTurret.transform.parent = gameObject.transform;
+            spawnedTurret.transform.rotation = gameObject.transform.rotation;
+        }
+        else if (buttonBehavior.powerPlantSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+        {
+            GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
+            spawnedPowerPlant.transform.parent = gameObject.transform;
+            spawnedPowerPlant.transform.rotation = gameObject.transform.rotation;
         }
     }
 
