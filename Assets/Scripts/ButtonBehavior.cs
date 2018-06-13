@@ -43,8 +43,14 @@ public class ButtonBehavior : MonoBehaviour
             GameObject.Find("Turret Button").tag = "Clicked Button";
             turretIsSelected = true;
             myTurretImage.color = Color.green;
-            GameObject[] unclickedButtons = GameObject.FindGameObjectsWithTag("Unclicked Button");
-            panel.setUnclickedButtons();
+            Button[] unclickedButtons = FindObjectsOfType<Button>();
+            foreach (Button button in unclickedButtons)
+            {
+                if (button.tag == "Unclicked Button")
+                {
+                    button.interactable = false;
+                }
+            }
         }
         else
         {
