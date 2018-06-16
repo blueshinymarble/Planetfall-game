@@ -162,7 +162,7 @@ public class ButtonBehavior : MonoBehaviour
 
     public void TestSoldier()
     {
-        if (!turretSelected)
+        if (!soldierSelected)
         {
             GameObject.Find("Soldier Button").tag = "Clicked Button";
             soldierSelected = true;
@@ -191,7 +191,7 @@ public class ButtonBehavior : MonoBehaviour
 
     public void TestShip()
     {
-        if (!turretSelected)
+        if (!shipSelected)
         {
             GameObject.Find("Ship Button").tag = "Clicked Button";
             shipSelected = true;
