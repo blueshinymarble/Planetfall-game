@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ButtonBehavior : MonoBehaviour
 {
-
     public bool turretSelected = false;
     public bool powerPlantSelected = false;
     public bool aAGunSelected = false;
