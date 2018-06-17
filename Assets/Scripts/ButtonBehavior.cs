@@ -65,10 +65,12 @@ public class ButtonBehavior : MonoBehaviour
             turretSelected = false;
             foreach (Button button in allButtons)
             {
-                button.interactable = true;
-                button.tag = "Unclicked Button";
+                if (button.tag == "Clicked Button" || button.tag == "Unclicked Button")
+                {
+                    button.interactable = true;
+                    button.tag = "Unclicked Button";
+                }
             }
-
         }
     }
 
@@ -95,8 +97,11 @@ public class ButtonBehavior : MonoBehaviour
             powerPlantSelected = false;
             foreach (Button button in allButtons)
             {
-                button.interactable = true;
-                button.tag = "Unclicked Button";
+                if (button.tag == "Clicked Button" || button.tag == "Unclicked Button")
+                {
+                    button.interactable = true;
+                    button.tag = "Unclicked Button";
+                }
             }
         }
     }
@@ -124,8 +129,11 @@ public class ButtonBehavior : MonoBehaviour
             aAGunSelected = false;
             foreach (Button button in allButtons)
             {
-                button.interactable = true;
-                button.tag = "Unclicked Button";
+                if (button.tag == "Clicked Button" || button.tag == "Unclicked Button")
+                {
+                    button.interactable = true;
+                    button.tag = "Unclicked Button";
+                }
             }
         }
     }
@@ -226,6 +234,25 @@ public class ButtonBehavior : MonoBehaviour
     public void ConfirmTurretSelection()
     {
         GameObject turretObject = GameObject.FindGameObjectWithTag("Just Placed");
-        turretObject.tag = "Turret";
+        turretObject.tag = "Untagged";
+        Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
+        panelAnim.Play("move panel out");
+        Button[] allButtons = FindObjectsOfType<Button>();
+        myTurretImage.color = Color.white;
+        turretSelected = false;
+        powerPlantSelected = false;
+        aAGunSelected = false;
+        terraformerSelected = false;
+        soldierSelected = false;
+        shipSelected = false;
+        foreach (Button button in allButtons)
+        {
+            if (button.tag == "Clicked Button" || button.tag == "Unclicked Button")
+            {
+                button.interactable = true;
+                button.tag = "Unclicked Button";
+                button.image.color = Color.white;
+            }
+        }
     }
 }

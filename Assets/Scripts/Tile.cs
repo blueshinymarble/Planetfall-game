@@ -77,6 +77,8 @@ public class Tile : MonoBehaviour
                 GameObject spawnedShip = Instantiate(ship, transform.position, Quaternion.identity);
                 spawnedShip.transform.parent = gameObject.transform;
             }
+
+            Debug.Log(gameObject.transform.childCount);
         }
 
     }
