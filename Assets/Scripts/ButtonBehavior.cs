@@ -215,6 +215,17 @@ public class ButtonBehavior : MonoBehaviour
                 button.tag = "Unclicked Button";
             }
         }
+    }
 
+    public void RotateObject()
+    {
+        GameObject objectToRotate = GameObject.FindGameObjectWithTag("Just Placed");
+        objectToRotate.transform.Rotate(0, 60, 0);
+    }
+
+    public void ConfirmTurretSelection()
+    {
+        GameObject turretObject = GameObject.FindGameObjectWithTag("Just Placed");
+        turretObject.tag = "Turret";
     }
 }
