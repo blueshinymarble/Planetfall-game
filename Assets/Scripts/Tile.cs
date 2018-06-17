@@ -38,8 +38,16 @@ public class Tile : MonoBehaviour
         
     }
 
+    Transform TargetIsAdjacent()
+    {
+
+        return transform;
+    }
+
     public void OnMouseDown()
     {
+        GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (buttonBehavior.turretSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
@@ -77,8 +85,12 @@ public class Tile : MonoBehaviour
                 GameObject spawnedShip = Instantiate(ship, transform.position, Quaternion.identity);
                 spawnedShip.transform.parent = gameObject.transform;
             }
-
-            Debug.Log(gameObject.transform.childCount);
+            else if (clickedUnit && gameObject.transform.GetChild(0).tag != "Hazard")
+            {
+                clickedUnit.transform.position = gameObject.transform.position;
+                clickedUnit.transform.parent = gameObject.transform;
+                clickedUnit.tag = "Untagged";
+            }
         }
 
     }

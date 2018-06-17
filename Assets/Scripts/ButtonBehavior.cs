@@ -233,8 +233,8 @@ public class ButtonBehavior : MonoBehaviour
 
     public void ConfirmTurretSelection()
     {
-        GameObject turretObject = GameObject.FindGameObjectWithTag("Just Placed");
-        turretObject.tag = "Untagged";
+        GameObject spawnedObject = GameObject.FindGameObjectWithTag("Just Placed");
+        spawnedObject.tag = "Untagged";
         Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
         panelAnim.Play("move panel out");
         Button[] allButtons = FindObjectsOfType<Button>();
