@@ -46,10 +46,7 @@ public class Tile : MonoBehaviour
     public void OnMouseDown()
     {
         GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
-        foreach(GameObject tile in collisions)
-        {
-            tile.tag = "Can Move Here";
-        }
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (buttonBehavior.turretSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
@@ -96,6 +93,4 @@ public class Tile : MonoBehaviour
         }
 
     }
-
-
 }
