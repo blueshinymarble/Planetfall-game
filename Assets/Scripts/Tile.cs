@@ -38,57 +38,61 @@ public class Tile : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         collisions.Add(other.gameObject);
-    }
+    }*/
 
     public void OnMouseDown()
     {
         GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
-
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && gameObject.transform.GetChild(0).tag != "Hazard")
         {
-            if (buttonBehavior.turretSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            if (buttonBehavior.turretSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedTurret = Instantiate(turret, transform.position, Quaternion.identity);
                 spawnedTurret.transform.parent = gameObject.transform;
                 spawnedTurret.transform.rotation = gameObject.transform.rotation;
             }
-            else if (buttonBehavior.powerPlantSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            else if (buttonBehavior.powerPlantSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
                 spawnedPowerPlant.transform.parent = gameObject.transform;
                 spawnedPowerPlant.transform.rotation = gameObject.transform.rotation;
             }
-            else if (buttonBehavior.aAGunSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            else if (buttonBehavior.aAGunSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedAAGun = Instantiate(aAGun, transform.position, Quaternion.identity);
                 spawnedAAGun.transform.parent = gameObject.transform;
                 spawnedAAGun.transform.rotation = gameObject.transform.rotation;
             }
-            else if (buttonBehavior.terraformerSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            else if (buttonBehavior.terraformerSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedTerraformer = Instantiate(terraformer, transform.position, Quaternion.identity);
                 spawnedTerraformer.transform.parent = gameObject.transform;
                 spawnedTerraformer.transform.rotation = gameObject.transform.rotation;
             }
-            else if (buttonBehavior.soldierSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            else if (buttonBehavior.soldierSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedSoldier = Instantiate(soldier, transform.position, Quaternion.identity);
                 spawnedSoldier.transform.parent = gameObject.transform;
                 spawnedSoldier.transform.rotation = gameObject.transform.rotation;
             }
-            else if (buttonBehavior.shipSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+            else if (buttonBehavior.shipSelected && gameObject.transform.childCount < 2)
             {
                 GameObject spawnedShip = Instantiate(ship, transform.position, Quaternion.identity);
                 spawnedShip.transform.parent = gameObject.transform;
             }
-            else if (clickedUnit && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.tag == "Can Move Here")            
+            else if (clickedUnit)            
             {
-                clickedUnit.transform.position = gameObject.transform.position;
-                clickedUnit.transform.parent = gameObject.transform;
-                clickedUnit.tag = "Untagged";
+                float distanceBetweenTileAndUnit = Vector3.Distance(gameObject.transform.position, clickedUnit.transform.position);
+                Debug.Log(distanceBetweenTileAndUnit);
+                if (distanceBetweenTileAndUnit < 6)
+                {
+                    clickedUnit.transform.position = gameObject.transform.position;
+                    clickedUnit.transform.parent = gameObject.transform;
+                    clickedUnit.tag = "Untagged";
+                }
             }
         }
 
