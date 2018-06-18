@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
     public GameObject[] terrainTiles;
 
     private ButtonBehavior buttonBehavior;
+    public List<GameObject> collisions = new List<GameObject>();
     //private MeshRenderer[] myTileMeshes;
     //private Board board;
 
@@ -29,7 +30,6 @@ public class Tile : MonoBehaviour
         {
             board.PopulateBoard((Board.TerrainTilesEnum)Random.Range(0, 6), transform);
         }
-       
     }
 
     // Update is called once per frame
@@ -38,16 +38,18 @@ public class Tile : MonoBehaviour
         
     }
 
-    Transform TargetIsAdjacent()
+    private void OnTriggerEnter(Collider other)
     {
-
-        return transform;
+        collisions.Add(other.gameObject);
     }
 
     public void OnMouseDown()
     {
         GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
-
+        foreach(GameObject tile in collisions)
+        {
+            tile.tag = "Can Move Here";
+        }
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (buttonBehavior.turretSelected && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
@@ -85,7 +87,7 @@ public class Tile : MonoBehaviour
                 GameObject spawnedShip = Instantiate(ship, transform.position, Quaternion.identity);
                 spawnedShip.transform.parent = gameObject.transform;
             }
-            else if (clickedUnit && gameObject.transform.GetChild(0).tag != "Hazard")
+            else if (clickedUnit && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.tag == "Can Move Here")            
             {
                 clickedUnit.transform.position = gameObject.transform.position;
                 clickedUnit.transform.parent = gameObject.transform;
