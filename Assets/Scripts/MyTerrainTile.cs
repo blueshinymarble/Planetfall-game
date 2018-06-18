@@ -14,14 +14,14 @@ public class MyTerrainTile : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if (transform.parent.childCount > 1)
+		/*if (transform.parent.childCount > 1)
         {
             anim.Play("Fade out");
         }
         else if (transform.parent.childCount == 1)
         {
             anim.Play("Fade in");
-        }
+        }*/
 	}
 
 }
