@@ -18,6 +18,7 @@ public class ButtonBehavior : MonoBehaviour
     private Image mySoldierImage;
     private Image myShipImage;
     private Board myBoard;
+    private BloomController bloomController;
 
 	// Use this for initialization
 	void Start ()
@@ -29,6 +30,7 @@ public class ButtonBehavior : MonoBehaviour
         myTerraformerImage = GameObject.Find("Terraformer Button").GetComponent<Image>();
         mySoldierImage = GameObject.Find("Soldier Button").GetComponent<Image>();
         myShipImage = GameObject.Find("Ship Button").GetComponent<Image>();
+        bloomController = GameObject.Find("Bloom Controller").GetComponent<BloomController>();
 	}
 	
 	// Update is called once per frame
@@ -39,7 +41,7 @@ public class ButtonBehavior : MonoBehaviour
 
     public void TestSwitch()
     {
-        myBoard.ChooseBloomSpace((Board.BloomCards)Random.Range(0,20));
+        bloomController.ChooseBloomSpace((BloomController.BloomCards)Random.Range(0,20));
     }
 
     public void TestTurretButton()
