@@ -50,36 +50,42 @@ public class Tile : MonoBehaviour
         {
             if (buttonBehavior.turretSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedTurret = Instantiate(turret, transform.position, Quaternion.identity);
                 spawnedTurret.transform.parent = gameObject.transform;
                 spawnedTurret.transform.rotation = gameObject.transform.rotation;
             }
             else if (buttonBehavior.powerPlantSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
                 spawnedPowerPlant.transform.parent = gameObject.transform;
                 spawnedPowerPlant.transform.rotation = gameObject.transform.rotation;
             }
             else if (buttonBehavior.aAGunSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedAAGun = Instantiate(aAGun, transform.position, Quaternion.identity);
                 spawnedAAGun.transform.parent = gameObject.transform;
                 spawnedAAGun.transform.rotation = gameObject.transform.rotation;
             }
             else if (buttonBehavior.terraformerSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedTerraformer = Instantiate(terraformer, transform.position, Quaternion.identity);
                 spawnedTerraformer.transform.parent = gameObject.transform;
                 spawnedTerraformer.transform.rotation = gameObject.transform.rotation;
             }
             else if (buttonBehavior.soldierSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedSoldier = Instantiate(soldier, transform.position, Quaternion.identity);
                 spawnedSoldier.transform.parent = gameObject.transform;
                 spawnedSoldier.transform.rotation = gameObject.transform.rotation;
             }
             else if (buttonBehavior.shipSelected)
             {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedShip = Instantiate(ship, transform.position, Quaternion.identity);
                 spawnedShip.transform.parent = gameObject.transform;
             }
@@ -88,12 +94,13 @@ public class Tile : MonoBehaviour
                 float distanceBetweenTileAndUnit = Vector3.Distance(gameObject.transform.position, clickedUnit.transform.position);
                 if (distanceBetweenTileAndUnit < 6)
                 {
+                    clickedUnit.transform.parent.GetComponentInChildren<Animator>().Play("Fade in");
                     clickedUnit.transform.position = gameObject.transform.position;
                     clickedUnit.transform.parent = gameObject.transform;
                     clickedUnit.tag = "Untagged";
+                    gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 }
             }
         }
-
     }
 }
