@@ -8,6 +8,10 @@ public class MyTerrainTile : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        if (gameObject.tag == "Hazard")
+        {
+            gameObject.transform.parent.tag = "Hazard";
+        }
         anim = GetComponent<Animator>();
 	}
 	
