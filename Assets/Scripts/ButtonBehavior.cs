@@ -44,6 +44,11 @@ public class ButtonBehavior : MonoBehaviour
         bloomController.ChooseBloomSpace((BloomController.BloomCards)Random.Range(0,20));
     }
 
+    public void TestBloomPlacement()
+    {
+        bloomController.ChooseRandomSpaceSpawnBloom();
+    }
+
     public void TestTurretButton()
     {
         if (!turretSelected)
