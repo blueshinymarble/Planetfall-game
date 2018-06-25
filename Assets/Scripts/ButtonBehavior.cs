@@ -19,6 +19,7 @@ public class ButtonBehavior : MonoBehaviour
     private Image myShipImage;
     private Board myBoard;
     private BloomController bloomController;
+    private GameManager gameManager;
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +32,7 @@ public class ButtonBehavior : MonoBehaviour
         mySoldierImage = GameObject.Find("Soldier Button").GetComponent<Image>();
         myShipImage = GameObject.Find("Ship Button").GetComponent<Image>();
         bloomController = GameObject.Find("Bloom Controller").GetComponent<BloomController>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -255,6 +257,28 @@ public class ButtonBehavior : MonoBehaviour
                 button.tag = "Unclicked Button";
                 button.image.color = Color.white;
             }
+        }
+    }
+
+    public void NextPhase()
+    {
+        switch (gameManager.currentState)
+        {
+            case GameManager.States.roundBegins:
+                Debug.Log("round begins");
+                break;
+
+            case GameManager.States.bloom:
+                Debug.Log("place bloom");
+                break;
+
+            case GameManager.States.collection:
+                Debug.Log("collection");
+                break;
+
+            case GameManager.States.actions:
+                Debug.Log("actions");
+                break;
         }
     }
 }
