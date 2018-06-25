@@ -39,11 +39,6 @@ public class ButtonBehavior : MonoBehaviour
         
     }
 
-    public void TestSwitch()
-    {
-        bloomController.ChooseBloomSpace((BloomController.BloomCards)Random.Range(0,20));
-    }
-
     public void TestBloomPlacement()
     {
         bloomController.ChooseRandomSpaceSpawnBloom();

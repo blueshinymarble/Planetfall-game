@@ -35,18 +35,6 @@ public class Board : MonoBehaviour
            
 	}
 
-    Transform FreePosition()
-    {
-        foreach (Transform freePosition in transform)
-        {
-            if (freePosition.childCount == 0)
-            {
-                return freePosition;
-            }
-        }
-        return null;
-    }
-
     public void PopulateBoard(TerrainTilesEnum tile, Transform child)
     {
             switch (tile)
@@ -105,8 +93,5 @@ public class Board : MonoBehaviour
                 }
                     break;
             } 
-        
-     
-        
     }
 }
