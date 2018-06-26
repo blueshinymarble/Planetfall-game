@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
-
+    public GameObject crosshair;
     public GameObject turret;
     public GameObject powerPlant;
     public GameObject aAGun;
@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour
     {
         if (gameManager.currentState == GameManager.States.firstRound)
         {
-
+            Instantiate(crosshair);
         }
     }
 

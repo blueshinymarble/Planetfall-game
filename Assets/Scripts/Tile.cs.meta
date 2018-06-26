@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: 30b921fd99490b942945871890b8768e
-timeCreated: 1528631670
+timeCreated: 1529993449
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - crosshair: {fileID: 21300000, guid: d8ee34cbd67aa7f4cb163ffbc5d764ab, type: 3}
+  - turret: {instanceID: 0}
+  - powerPlant: {instanceID: 0}
+  - aAGun: {instanceID: 0}
+  - terraformer: {instanceID: 0}
+  - soldier: {instanceID: 0}
+  - ship: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
