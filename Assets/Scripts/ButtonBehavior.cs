@@ -235,7 +235,7 @@ public class ButtonBehavior : MonoBehaviour
         objectToRotate.transform.Rotate(0, 60, 0);
     }
 
-    public void ConfirmTurretSelection()
+    public void ConfirmSelection()
     {
         GameObject spawnedObject = GameObject.FindGameObjectWithTag("Just Placed");
         spawnedObject.tag = "Untagged";
@@ -264,8 +264,14 @@ public class ButtonBehavior : MonoBehaviour
     {
         switch (gameManager.currentState)
         {
+            case GameManager.States.firstRound:
+                Debug.Log("first round");
+                break;
+
             case GameManager.States.roundBegins:
-                Debug.Log("round begins");
+                Debug.Log("round begins switching to first round");
+                gameManager.currentState = GameManager.States.firstRound;
+                gameManager.FirstTurn();
                 break;
 
             case GameManager.States.bloom:
