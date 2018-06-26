@@ -14,9 +14,10 @@ public class Tile : MonoBehaviour
     public GameObject soldier;
     public GameObject ship;
     public GameObject[] terrainTiles;
-
-    private ButtonBehavior buttonBehavior;
     public List<GameObject> collisions = new List<GameObject>();
+
+    private GameManager gameManager;
+    private ButtonBehavior buttonBehavior;
     //private MeshRenderer[] myTileMeshes;
     //private Board board;
 
@@ -24,6 +25,7 @@ public class Tile : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         Board board = GameObject.Find("Board").GetComponent<Board>();
         buttonBehavior = GameObject.Find("Button Behavior").GetComponent<ButtonBehavior>();
         while (gameObject.transform.childCount < 1)
@@ -36,6 +38,14 @@ public class Tile : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnMouseOver()
+    {
+        if (gameManager.currentState == GameManager.States.firstRound)
+        {
+
+        }
     }
 
     public void OnMouseDown()// determines what happens when clicked depending on what is occupying this space
