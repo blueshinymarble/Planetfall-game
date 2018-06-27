@@ -42,13 +42,26 @@ public class Tile : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (gameManager.currentState == GameManager.States.firstRound)
+        Transform childCrosshair = gameObject.GetComponentInChildren<Transform>();
+        if (gameManager.currentState == GameManager.States.firstRound && gameObject.transform.childCount < 2 && gameObject.tag != "Hazard")
         {
-            Instantiate(crosshair);
+            GameObject newCrosshair = Instantiate(crosshair, gameObject.transform.position, Quaternion.identity);
+            newCrosshair.transform.parent = gameObject.transform;
         }
     }
 
-    public void OnMouseDown()// determines what happens when clicked depending on what is occupying this space
+    private void OnMouseExit()
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            if (child.tag == "Crosshair")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void OnMouseDown()// determines what happens when clicked depending on some conditions
     {
         GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
         if (!EventSystem.current.IsPointerOverGameObject() && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
