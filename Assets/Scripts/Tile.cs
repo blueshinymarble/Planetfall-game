@@ -64,7 +64,7 @@ public class Tile : MonoBehaviour
     public void OnMouseDown()// determines what happens when clicked depending on some conditions
     {
         GameObject clickedUnit = GameObject.FindGameObjectWithTag("Unit Selected");
-        if (!EventSystem.current.IsPointerOverGameObject() && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount < 2)
+        if (!EventSystem.current.IsPointerOverGameObject() && gameObject.transform.GetChild(0).tag != "Hazard" && gameObject.transform.childCount <= 2)
         {
             if (buttonBehavior.turretSelected) //occupying unit is a turret
             {
@@ -118,6 +118,13 @@ public class Tile : MonoBehaviour
                     clickedUnit.tag = "Untagged";
                     gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 }
+            }
+            else if (gameManager.currentState == GameManager.States.firstRound)//if first round 
+            {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
+                GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
+                spawnedPowerPlant.transform.parent = gameObject.transform;
+                spawnedPowerPlant.transform.rotation = gameObject.transform.rotation;
             }
         }
     }
