@@ -20,6 +20,7 @@ public class ButtonBehavior : MonoBehaviour
     private Board myBoard;
     private BloomController bloomController;
     private GameManager gameManager;
+    private Animator announcer;
 	// Use this for initialization
 	void Start ()
     {
@@ -32,10 +33,12 @@ public class ButtonBehavior : MonoBehaviour
         myShipImage = GameObject.Find("Ship Button").GetComponent<Image>();
         bloomController = GameObject.Find("Bloom Controller").GetComponent<BloomController>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        announcer = GameObject.Find("Announcer").GetComponent<Animator>();
+
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         
     }
@@ -239,6 +242,10 @@ public class ButtonBehavior : MonoBehaviour
         Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
         panelAnim.Play("move panel out");//move confirmation buttons out of the way
         GameManager.readyToContinue = true;//let the next button change phase
+        if (gameManager.currentState == GameManager.States.firstRound)
+        {
+            announcer.Play("announcer fade out");
+        }
     }
 
     public void Cancel()
@@ -301,6 +308,8 @@ public class ButtonBehavior : MonoBehaviour
                 break;
 
             case GameManager.States.bloom:
+                announcer.Play("announcer fade out");
+                gameManager.currentState = GameManager.States.actions;
                 Debug.Log("place bloom");
                 break;
 
