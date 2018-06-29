@@ -16,8 +16,10 @@ public class Tile : MonoBehaviour
     public GameObject[] terrainTiles;
     public List<GameObject> collisions = new List<GameObject>();
 
+    private static bool showCrosshair;
     private GameManager gameManager;
     private ButtonBehavior buttonBehavior;
+    private GameObject newCrosshair;
     //private MeshRenderer[] myTileMeshes;
     //private Board board;
 
@@ -32,6 +34,7 @@ public class Tile : MonoBehaviour
         {
             board.PopulateBoard((Board.TerrainTilesEnum)Random.Range(0, 6), transform);
         }
+        showCrosshair = true;
     }
 
     // Update is called once per frame
@@ -43,10 +46,13 @@ public class Tile : MonoBehaviour
     private void OnMouseOver()
     {
         Transform childCrosshair = gameObject.GetComponentInChildren<Transform>();
-        if (gameManager.currentState == GameManager.States.firstRound && gameObject.transform.childCount < 2 && gameObject.tag != "Hazard")
+        if (showCrosshair == true)
         {
-            GameObject newCrosshair = Instantiate(crosshair, gameObject.transform.position, Quaternion.identity);
-            newCrosshair.transform.parent = gameObject.transform;
+            if (gameManager.currentState == GameManager.States.firstRound && gameObject.transform.childCount < 2 && gameObject.tag != "Hazard")
+            {
+                newCrosshair = Instantiate(crosshair, gameObject.transform.position, Quaternion.identity);
+                newCrosshair.transform.parent = gameObject.transform;
+            } 
         }
     }
 
@@ -125,6 +131,14 @@ public class Tile : MonoBehaviour
                 GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
                 spawnedPowerPlant.transform.parent = gameObject.transform;
                 spawnedPowerPlant.transform.rotation = gameObject.transform.rotation;
+                showCrosshair = false;
+                foreach (Transform child in transform)
+                {
+                    if (child.tag == "Crosshair")
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
             }
         }
     }
