@@ -125,7 +125,7 @@ public class Tile : MonoBehaviour
                     gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 }
             }
-            else if (gameManager.currentState == GameManager.States.firstRound && GameManager.readyToContinue == false)//if first round 
+            else if (gameManager.currentState == GameManager.States.firstRound && GameManager.readyToContinue == false && GameManager.placePowerplant == true)//if first round 
             {
                 gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);
@@ -139,6 +139,13 @@ public class Tile : MonoBehaviour
                         Destroy(child.gameObject);
                     }
                 }
+            }
+            else if (gameManager.currentState == GameManager.States.firstRound && GameManager.readyToContinue == false && GameManager.placeTerraformer == true)// if first round and powerplant has been placed
+            {
+                gameObject.GetComponentInChildren<Animator>().Play("Fade out");
+                GameObject spawnedTerraformer = Instantiate(terraformer, transform.position, Quaternion.identity);
+                spawnedTerraformer.transform.parent = gameObject.transform;
+                spawnedTerraformer.transform.rotation = gameObject.transform.rotation;
             }
         }
     }

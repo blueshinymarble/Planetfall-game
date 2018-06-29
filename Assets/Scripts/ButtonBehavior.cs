@@ -241,11 +241,13 @@ public class ButtonBehavior : MonoBehaviour
     {
         Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
         panelAnim.Play("move panel out");//move confirmation buttons out of the way
-        GameManager.readyToContinue = true;//let the next button change phase
+        //TODO let the next button change phase
         if (gameManager.currentState == GameManager.States.firstRound)
         {
             announcer.Play("announcer fade out");
         }
+        GameObject spawnedObject = GameObject.FindGameObjectWithTag("Just Placed");
+        spawnedObject.tag = "Untagged";
     }
 
     public void Cancel()
@@ -290,31 +292,37 @@ public class ButtonBehavior : MonoBehaviour
     {
         switch (gameManager.currentState)
         {
+            case GameManager.States.roundBegins:
+                gameManager.currentState = GameManager.States.firstRound;
+                gameManager.FirstTurn();
+                GameManager.readyToContinue = false;
+                break;
+
             case GameManager.States.firstRound:
                 if (GameManager.readyToContinue == true)
                 {
-                    Debug.Log("first round switching to bloom placement");
+                    gameManager.currentState = GameManager.States.collection;
+                    GameManager.readyToContinue = false;
+                }else
+                {
+                    GameManager.placeTerraformer = true;
+                    gameManager.PlaceTerraformer();
+                }
+                break;
+
+            case GameManager.States.collection:
+                if (GameManager.readyToContinue == true)
+                {
                     gameManager.currentState = GameManager.States.bloom;
                     gameManager.SetBlooms();
                     GameManager.readyToContinue = false;
                 }
                 break;
 
-            case GameManager.States.roundBegins:
-                Debug.Log("round begins switching to first round");
-                gameManager.currentState = GameManager.States.firstRound;
-                gameManager.FirstTurn();
-                GameManager.readyToContinue = false;
-                break;
-
             case GameManager.States.bloom:
                 announcer.Play("announcer fade out");
                 gameManager.currentState = GameManager.States.actions;
                 Debug.Log("place bloom");
-                break;
-
-            case GameManager.States.collection:
-                Debug.Log("collection");
                 break;
 
             case GameManager.States.actions:
