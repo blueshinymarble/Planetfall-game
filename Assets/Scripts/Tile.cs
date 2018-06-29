@@ -15,8 +15,8 @@ public class Tile : MonoBehaviour
     public GameObject ship;
     public GameObject[] terrainTiles;
     public List<GameObject> collisions = new List<GameObject>();
+    public static bool showCrosshair;
 
-    private static bool showCrosshair;
     private GameManager gameManager;
     private ButtonBehavior buttonBehavior;
     private GameObject newCrosshair;
@@ -125,7 +125,7 @@ public class Tile : MonoBehaviour
                     gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 }
             }
-            else if (gameManager.currentState == GameManager.States.firstRound)//if first round 
+            else if (gameManager.currentState == GameManager.States.firstRound && GameManager.readyToContinue == false)//if first round 
             {
                 gameObject.GetComponentInChildren<Animator>().Play("Fade out");
                 GameObject spawnedPowerPlant = Instantiate(powerPlant, transform.position, Quaternion.identity);

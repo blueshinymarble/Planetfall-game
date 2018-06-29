@@ -20,7 +20,6 @@ public class ButtonBehavior : MonoBehaviour
     private Board myBoard;
     private BloomController bloomController;
     private GameManager gameManager;
-
 	// Use this for initialization
 	void Start ()
     {
@@ -235,6 +234,26 @@ public class ButtonBehavior : MonoBehaviour
         objectToRotate.transform.Rotate(0, 60, 0);
     }
 
+    public void Confirm()
+    {
+        Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
+        panelAnim.Play("move panel out");//move confirmation buttons out of the way
+        GameManager.readyToContinue = true;//let the next button change phase
+    }
+
+    public void Cancel()
+    {
+        Animator panelAnim = GameObject.Find("Object Rotate Confirm Panel").GetComponent<Animator>();
+        panelAnim.Play("move panel out");//move buttons out of the way
+        GameObject[] destroyPowerPlants = GameObject.FindGameObjectsWithTag("Just Placed");    //let the action that was cancelled repeat
+        foreach (GameObject toDestroy in destroyPowerPlants)
+        {
+            Tile.showCrosshair = true;
+            toDestroy.transform.parent.GetComponentInChildren<Animator>().Play("Fade in");
+            Destroy(toDestroy);
+        }
+    }
+
     public void ConfirmSelection()
     {
         GameObject spawnedObject = GameObject.FindGameObjectWithTag("Just Placed");
@@ -265,13 +284,20 @@ public class ButtonBehavior : MonoBehaviour
         switch (gameManager.currentState)
         {
             case GameManager.States.firstRound:
-                Debug.Log("first round");
+                if (GameManager.readyToContinue == true)
+                {
+                    Debug.Log("first round switching to bloom placement");
+                    gameManager.currentState = GameManager.States.bloom;
+                    gameManager.SetBlooms();
+                    GameManager.readyToContinue = false;
+                }
                 break;
 
             case GameManager.States.roundBegins:
                 Debug.Log("round begins switching to first round");
                 gameManager.currentState = GameManager.States.firstRound;
                 gameManager.FirstTurn();
+                GameManager.readyToContinue = false;
                 break;
 
             case GameManager.States.bloom:
